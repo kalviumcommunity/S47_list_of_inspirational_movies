@@ -24,13 +24,8 @@ app.listen(3000, ()=> {
     console.log('nodi api is running in the 3000 port')
 });
 
-
 app.use(express.json());
 app.get('/getting', getting);
 app.post('/posting', posting);
 app.delete('/:id', deletee);
 app.put('/:id', putting);
-
-app.get('/', (req, res) => {
-  res.send('Server is up and running');
-});
