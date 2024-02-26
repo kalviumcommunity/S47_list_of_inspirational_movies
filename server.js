@@ -13,8 +13,6 @@ const config = {
 		'mongodb+srv://akshitp:E7lFFxThDg8fe7Dd@cluster0.6uq2j9y.mongodb.net/?retryWrites=true&w=majority'
 }
 
-// const serverdata = data;
-// console.log(serverdata);
 
 app.get('/ping', (req, res) => {
     mongoose.connect(config.mongoURI)
@@ -26,12 +24,9 @@ app.get('/ping', (req, res) => {
     })
 })
 
-
-
 app.get('/getting', getting);
 app.post('/posting', posting);
-// app.delete('/delete', deletee);
-// app.put('/update', putting);
+
 app.put('/update/:id', (req, res) => {
     const id = parseInt(req.params.id);
     console.log(id);
