@@ -1,66 +1,62 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// Update.jsx
 
-function AddMovieForm() {
-    const [formData, setFormData] = useState({
-        MOVIE_NAME: '',
-        IMDb_RATINGS: '',
-        ROTTEN_TOMATOES_RATING: '',
-        RELEASE_DATE: '',
-        OFFICIAL_LANGUAGE: '',
-        AWARD_WON: ''
-    });
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+
+export default function Update() {
+    // const { id } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+    // console.log(location.state.data);
+
+    const [formData, setFormData] = useState({
+        ID: location.state?.data.ID,
+        MOVIE_NAME: location.state?.data.MOVIE_NAME,
+        IMDb_RATINGS: location.state?.data.IMDb_RATINGS.toString(),
+        ROTTEN_TOMATOES_RATING: location.state?.data.ROTTEN_TOMATOES_RATING,
+        RELEASE_DATE: location.state?.data.RELEASE_DATE,
+        OFFICIAL_LANGUAGE: location.state?.data.OFFICIAL_LANGUAGE,
+        AWARD_WON: location.state?.data.AWARD_WON
+    });
+    console.log(formData);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const name = e.target.name;
+        const value = e.target.value;
         setFormData({
             ...formData,
             [name]: value
         });
+        console.log(formData);
     };
+    
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const newMovie = {
+        const updatedMovie = {
             ...formData,
             IMDb_RATINGS: parseFloat(formData.IMDb_RATINGS)
         };
+        console.log(updatedMovie);
 
-        try {
-            const response = await fetch("http://localhost:3000/posting", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(newMovie)
+        axios.put(`http://localhost:3000/update/${formData.ID}`, updatedMovie)
+            .then(response => {
+                console.log('Movie updated successfully:', response.data);
+                navigate('/'); // Navigate to the movies page after successful update
+            })
+            .catch(error => {
+                console.error('Error updating movie:', error);
             });
-
-            if (!response.ok) {
-                throw new Error('Failed to add movie');
-            }
-
-            // OnAddMovie(newMovie); // Call the parent component function if successful
-            setFormData({
-                MOVIE_NAME: '',
-                IMDb_RATINGS: '',
-                ROTTEN_TOMATOES_RATING: '',
-                RELEASE_DATE: '',
-                OFFICIAL_LANGUAGE: '',
-                AWARD_WON: ''
-            });
-            navigate('/');
-        } catch (error) {
-            console.error('Error adding movie:', error);
-            // Handle error as needed
-        }
     };
 
+
     return (
-        <div className="add-movie-form">
-            <h2>Add New Movie</h2>
+        <div>
+            <h2>Update Movie</h2>
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
+                <div>
+                    <h3>ID: {formData.ID}</h3>
                     <label htmlFor="movieName">Movie Name:</label>
                     <input
                         type="text"
@@ -71,8 +67,7 @@ function AddMovieForm() {
                         required
                     />
                 </div>
-
-                <div className="form-group">
+                <div>
                     <label htmlFor="imdbRatings">IMDb Ratings:</label>
                     <input
                         type="number"
@@ -80,14 +75,11 @@ function AddMovieForm() {
                         name="IMDb_RATINGS"
                         value={formData.IMDb_RATINGS}
                         onChange={handleChange}
-                        min="0"
-                        max="10"
                         step="0.1"
                         required
                     />
                 </div>
-
-                <div className="form-group">
+                <div>
                     <label htmlFor="rottenTomatoesRating">Rotten Tomatoes Rating:</label>
                     <input
                         type="text"
@@ -95,16 +87,13 @@ function AddMovieForm() {
                         name="ROTTEN_TOMATOES_RATING"
                         value={formData.ROTTEN_TOMATOES_RATING}
                         onChange={handleChange}
-                        pattern="\d{1,3}%"
-                        title="Enter percentage rating (e.g., 67%)"
                         required
                     />
                 </div>
-
-                <div className="form-group">
+                <div>
                     <label htmlFor="releaseDate">Release Date:</label>
                     <input
-                        type="date"
+                        type="text"
                         id="releaseDate"
                         name="RELEASE_DATE"
                         value={formData.RELEASE_DATE}
@@ -112,8 +101,7 @@ function AddMovieForm() {
                         required
                     />
                 </div>
-
-                <div className="form-group">
+                <div>
                     <label htmlFor="officialLanguage">Official Language:</label>
                     <input
                         type="text"
@@ -124,8 +112,7 @@ function AddMovieForm() {
                         required
                     />
                 </div>
-
-                <div className="form-group">
+                <div>
                     <label htmlFor="awardWon">Award Won:</label>
                     <input
                         type="text"
@@ -136,11 +123,8 @@ function AddMovieForm() {
                         required
                     />
                 </div>
-
-                <button type="submit">Add Movie</button>
+                <button type="submit">Update Movie</button>
             </form>
         </div>
     );
 }
-
-export default AddMovieForm;
