@@ -12,23 +12,14 @@ const getting = app.get('/getting', (req, res) => {
 
 const posting = app.post('/posting', (req, res) => {
     const newData = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     data.push(newData);
     res.status(201).json(newData);
 });
 
-const deletee = app.delete('/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-        data.splice(id, 1);
-        res.json(data);
-    });
+
    
-    const putting = app.put('/:id', (req, res) => {
-        const id = parseInt(req.params.id);
-        const update= req.body
-        data[id] = update
-            res.json(data);
-        });
+    // const putting = 
 
 
-module.exports = { posting, getting, deletee,putting};
+module.exports = { posting, getting};
