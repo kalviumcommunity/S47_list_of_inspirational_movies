@@ -1,7 +1,7 @@
 
 const express = require('express');
 const app = express();
-const data = require('./Data.json');
+const data = require('../Data.json');
 
 app.use(express.json());
 
@@ -16,10 +16,6 @@ const posting = app.post('/posting', (req, res) => {
     data.push(newData);
     res.status(201).json(newData);
 });
-
-
-   
-    // const putting = 
 
 
 module.exports = { posting, getting};

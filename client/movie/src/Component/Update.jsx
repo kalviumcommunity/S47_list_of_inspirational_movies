@@ -40,7 +40,7 @@ export default function Update() {
         };
         console.log(updatedMovie);
 
-        axios.put(`http://localhost:3000/update/${formData.ID}`, updatedMovie)
+        axios.put(`http://localhost:3000/movies/update/${formData.ID}`, updatedMovie)
             .then(response => {
                 console.log('Movie updated successfully:', response.data);
                 navigate('/'); // Navigate to the movies page after successful update

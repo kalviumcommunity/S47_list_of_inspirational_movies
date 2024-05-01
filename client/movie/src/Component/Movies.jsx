@@ -17,7 +17,7 @@ export default function Movies() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:3000/getting")
+        fetch("http://localhost:3000/movies")
             .then((res) => res.json())
             .then((data) => setUsers(data));
     }, []);
@@ -26,7 +26,7 @@ export default function Movies() {
         navigate(`/update`, {state: {data}});
     };
     const handleDeleteClick = (id) => {
-        axios.delete(`http://localhost:3000/delete/${id}`).then(() => {
+        axios.delete(`http://localhost:3000/movies/delete/${id}`).then(() => {
             setUsers(users.filter((user) => user.ID !== id));
         })
     }
