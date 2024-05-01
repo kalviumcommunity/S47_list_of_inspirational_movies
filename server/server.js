@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const Movie = require('./movieSchema');
+const User = require('./userSchema');
+const Joi = require('joi');
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -48,6 +50,33 @@ mongoose.connect(config.mongoURI)
                 res.status(500).json({ message: 'Internal server error' });
             }
         });
+
+
+    // POST route to create a new user
+    app.post('/users', async (req, res) => {
+        const schema = Joi.object({
+          name: Joi.string().min(3).max(30).required().label('Userame'),
+          email: Joi.string().email().required().label('Email'),
+        }).options({abortEarly: false});
+  
+        const userData = req.body; // Get user data from the request body
+        console.log('request body:  ',userData)
+        const { error, value } = schema.validate(userData);
+        if (error) {
+          console.log(error)
+          res.status(400).json({ error });
+        }
+        else {
+          try {
+            console.log("validated value:  ",value)
+            const createdUser = await User.create(value); // Create a new user
+            console.log('user created:  ',createdUser)
+            res.status(201).json(createdUser); // Respond with the created user
+          } catch (error) {
+            res.status(500).json({ message: 'Error creating user', error: error.message }); // Respond with an error message
+          }
+        }
+      });
 
         // Start the server
         app.listen(3000, () => {
