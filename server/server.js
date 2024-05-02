@@ -4,9 +4,21 @@ const cors = require('cors');
 const Movie = require('./movieSchema');
 const User = require('./userSchema');
 const Joi = require('joi');
+const cookieParser = require('cookie-parser');
 const app = express();
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+
+// app.use(cors())
+app.use(cookieParser());
+
+const corsOptions = {
+    origin: 'http://localhost:5173', // Replace with your frontend application's origin
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 
 const config = {
     mongoURI: 'mongodb+srv://akshitp:E7lFFxThDg8fe7Dd@cluster0.6uq2j9y.mongodb.net/firstASAP?retryWrites=true&w=majority'
@@ -71,12 +83,54 @@ mongoose.connect(config.mongoURI)
             console.log("validated value:  ",value)
             const createdUser = await User.create(value); // Create a new user
             console.log('user created:  ',createdUser)
-            res.status(201).json(createdUser); // Respond with the created user
+
+            res.status(201).json(createdUser); 
           } catch (error) {
-            res.status(500).json({ message: 'Error creating user', error: error.message }); // Respond with an error message
+            res.status(500).json({ message: 'Error creating user', error: error.message }); 
           }
         }
       });
+
+
+           // POST route to login
+    app.post('/login', async (req, res) => {
+        const schema = Joi.object({
+          name: Joi.string().min(3).max(30).required().label('Username'),
+          email: Joi.string().email().required().label('Email'),
+        }).options({ abortEarly: false });
+      
+        const userData = req.body;
+      
+        const { error, value } = schema.validate(userData);
+      
+        if (error) {
+          res.status(400).json({ message: 'Validation failed', errors: error.details });
+          return;
+        }
+      
+        const { name, email} = value;
+      
+        try {
+          const findUser = await User.findOne({ name, email });
+          if (!findUser) {
+            res.status(404).json({ message: 'user not found' });
+            return;
+          }
+          res.cookie('username', name,{httpOnly: true});
+          res.status(200).json({message: 'user found and logged in'});
+        } catch (err) {
+          res.status(500).json({ message: 'Error', error: err.message });
+        }
+      });
+  
+  
+      app.get('/logout', (req, res) => {
+        res.clearCookie('username');
+        res.status(200).send({ message: 'Logged out successfully' });
+      }); 
+
+
+
 
         // Start the server
         app.listen(3000, () => {
