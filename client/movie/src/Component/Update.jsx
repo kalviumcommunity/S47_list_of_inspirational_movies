@@ -38,16 +38,22 @@ export default function Update() {
             ...formData,
             IMDb_RATINGS: parseFloat(formData.IMDb_RATINGS)
         };
-        console.log(updatedMovie);
 
-        axios.put(`http://localhost:3000/movies/update/${formData.ID}`, updatedMovie)
-            .then(response => {
-                console.log('Movie updated successfully:', response.data);
-                navigate('/'); // Navigate to the movies page after successful update
-            })
-            .catch(error => {
-                console.error('Error updating movie:', error);
-            });
+        axios.put(`http://localhost:3000/movies/update/${formData.ID}`, updatedMovie, {
+            withCredentials: true  // Send cookies with the request
+        })
+        .then(response => {
+            console.log('Movie updated successfully:', response.data);
+            navigate('/'); // Navigate to the movies page after successful update
+        })
+        .catch(error => {
+            console.error('Error updating movie:', error);
+            if (error.response && error.response.status === 401) {
+                alert('Unauthorized access. Please log in.'); 
+                // Unauthorized, redirect to login page
+                navigate('/login');
+            }
+        });
     };
 
 

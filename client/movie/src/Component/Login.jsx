@@ -22,6 +22,7 @@ const Login = () => {
                 setlogoutbool(true)
                 setUsername('');
                 setEmail('');
+                navigate('/');
             })
             .catch(error => {
                 const errormessage = error?.response?.data?.errors?.map((error) => error?.message).join('\n ');
