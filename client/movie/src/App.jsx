@@ -1,5 +1,4 @@
 import React from 'react';
-// import './App.css'
 import { Form, Link, Route, Routes } from 'react-router-dom';
 import Movies from './Component/Movies';
 import Add from './Component/Add';
@@ -19,7 +18,6 @@ function App() {
                 <Route path="/add" element={<Add />} />
                 <Route path="/update" element={<Update />} />
                 <Route path="/" element={<Movies />} />
-                {/* <Route path="/login" element={<Form />} /> */}
                 <Route path='/login' element={<Login/>} />
             </Routes>
         </>

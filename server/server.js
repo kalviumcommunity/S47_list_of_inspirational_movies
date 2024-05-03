@@ -8,19 +8,16 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const jwt = require('jsonwebtoken');
 app.use(express.json());
-// app.use(cors());
-
-// app.use(cors())
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Replace with your frontend application's origin
+    origin: 'http://localhost:5173',
     credentials: true,
 };
 
 app.use(cors(corsOptions));
 
-const SECRET_KEY = 'your_secret_key'; // Define your secret key
+const SECRET_KEY = 'your_secret_key'; 
 
 const authenticateToken = (req, res, next) => {
     const token = req.cookies.token;
@@ -59,7 +56,7 @@ mongoose.connect(config.mongoURI)
         });
 
         // Update a movie by ID
-        app.put('/movies/update/:id', authenticateToken, async (req, res) => { // Add authentication middleware
+        app.put('/movies/update/:id', authenticateToken, async (req, res) => { 
             try {
                 const id = req.params.id;
                 const updatedMovie = await Movie.findOneAndUpdate({ ID: id }, req.body, { new: true });
@@ -90,7 +87,7 @@ mongoose.connect(config.mongoURI)
           email: Joi.string().email().required().label('Email'),
         }).options({abortEarly: false});
   
-        const userData = req.body; // Get user data from the request body
+        const userData = req.body; 
         console.log('request body:  ',userData)
         const { error, value } = schema.validate(userData);
         if (error) {
