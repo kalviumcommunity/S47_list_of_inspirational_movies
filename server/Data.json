@@ -1,0 +1,93 @@
+[
+    {
+      "ID": 1,
+      "MOVIE_NAME": "The Pursuit of Happyness",
+      "IMDb_RATINGS": 8,
+      "ROTTEN_TOMATOES_RATING": "67%",
+      "RELEASE_DATE": "15/12/2006",
+      "OFFICIAL_LANGUAGE": "ENGLISH",
+      "AWARD_WON": "NO"
+    },
+    {
+      "ID": 2,
+      "MOVIE_NAME": "The Shawshank Redemption",
+      "IMDb_RATINGS": 9.3,
+      "ROTTEN_TOMATOES_RATING": "91%",
+      "RELEASE_DATE": "23/9/1994",
+      "OFFICIAL_LANGUAGE": "ENGLISH",
+      "AWARD_WON": "NO"
+    },
+    {
+      "ID": 3,
+      "MOVIE_NAME": "The Blind Side",
+      "IMDb_RATINGS": 7.6,
+      "ROTTEN_TOMATOES_RATING": "66%",
+      "RELEASE_DATE": "20/11/2009",
+      "OFFICIAL_LANGUAGE": "ENGLISH",
+      "AWARD_WON": "NO"
+    },
+    {
+      "ID": 4,
+      "MOVIE_NAME": "Dangal",
+      "IMDb_RATINGS": 8.4,
+      "ROTTEN_TOMATOES_RATING": "86%",
+      "RELEASE_DATE": "23/12/2016",
+      "OFFICIAL_LANGUAGE": "HINDI",
+      "AWARD_WON": "YES"
+    },
+    {
+      "ID": 5,
+      "MOVIE_NAME": "12th - Fail",
+      "IMDb_RATINGS": 9.2,
+      "ROTTEN_TOMATOES_RATING": "90%",
+      "RELEASE_DATE": "27/10/2023",
+      "OFFICIAL_LANGUAGE": "HINDI",
+      "AWARD_WON": "YES"
+    },
+    {
+      "ID": 6,
+      "MOVIE_NAME": "Bhaag Milkha Bhaag",
+      "IMDb_RATINGS": 8.2,
+      "ROTTEN_TOMATOES_RATING": "89%",
+      "RELEASE_DATE": "12/7/2013",
+      "OFFICIAL_LANGUAGE": "HINDI",
+      "AWARD_WON": "YES"
+    },
+    {
+      "ID": 7,
+      "MOVIE_NAME": "Chak De! India",
+      "IMDb_RATINGS": 8.2,
+      "ROTTEN_TOMATOES_RATING": "88%",
+      "RELEASE_DATE": "10/8/2007",
+      "OFFICIAL_LANGUAGE": "HINDI",
+      "AWARD_WON": "YES"
+    },
+    {
+      "ID": 8,
+      "MOVIE_NAME": "Lakshya",
+      "IMDb_RATINGS": 7.9,
+      "ROTTEN_TOMATOES_RATING": "71%",
+      "RELEASE_DATE": "18/6/2004",
+      "OFFICIAL_LANGUAGE": "HINDI",
+      "AWARD_WON": "NO"
+    },
+    {
+      "ID": 9,
+      "MOVIE_NAME": "Airlift",
+      "IMDb_RATINGS": 8.1,
+      "ROTTEN_TOMATOES_RATING": "69%",
+      "RELEASE_DATE": "22/1/2016",
+      "OFFICIAL_LANGUAGE": "HINDI",
+      "AWARD_WON": "NO"
+    },
+    {
+      "ID": 10,
+      "MOVIE_NAME": "Mary Kom",
+      "IMDb_RATINGS": 6.8,
+      "ROTTEN_TOMATOES_RATING": "67%",
+      "RELEASE_DATE": "5/9/2014",
+      "OFFICIAL_LANGUAGE": "HINDI",
+      "AWARD_WON": "NO"
+    }
+  ]
+  
