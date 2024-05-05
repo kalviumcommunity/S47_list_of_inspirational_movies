@@ -9,5 +9,3 @@ Inspirational movies are films that aim to motivate and uplift the audience by c
 3 The Blind Side
 4 Dangal
 5 12th - Fail
-
-deploy link: https://inspirational-movies.pages.dev/
